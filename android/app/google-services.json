@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "481348685498",
+    "project_id": "reportya-tesis",
+    "storage_bucket": "reportya-tesis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481348685498:android:5b71fbafdb7862fa423c83",
+        "android_client_info": {
+          "package_name": "com.codigocorrecto.reportya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBH8U7Qw-80t6tHY8n1xrR9ncHg0zZX4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
