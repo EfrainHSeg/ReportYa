@@ -58,7 +58,9 @@ class _HomeViewState extends State<HomeView> {
   }
 
   ReporteEstado _mapEstado(String? status) {
-    return status == 'submitted' ? ReporteEstado.aprobado : ReporteEstado.pendiente;
+    if (status == 'reviewed' || status == 'closed') return ReporteEstado.aprobado;
+    if (status == 'rejected') return ReporteEstado.rechazado;
+    return ReporteEstado.pendiente;
   }
 
   _ReporteDisplay _toDisplay(Map<String, dynamic> r) {

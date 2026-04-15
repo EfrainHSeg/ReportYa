@@ -98,10 +98,10 @@ class StatsViewModel extends ChangeNotifier {
 
       total          = currList.length;
       totalPrev      = prevList.length;
-      aprobados      = currList.where((r) => r['status'] == 'submitted').length;
-      aprobadosPrev  = prevList.where((r) => r['status'] == 'submitted').length;
-      pendientes     = currList.where((r) => r['status'] == 'draft').length;
-      pendientesPrev = prevList.where((r) => r['status'] == 'draft').length;
+      aprobados      = currList.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length;
+      aprobadosPrev  = prevList.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length;
+      pendientes     = currList.where((r) => r['status'] == 'draft' || r['status'] == 'reviewed' || r['status'] == 'closed').length;
+      pendientesPrev = prevList.where((r) => r['status'] == 'draft' || r['status'] == 'reviewed' || r['status'] == 'closed').length;
       avgSemana      = currList.length / semanas;
       avgSemanaPrev  = prevList.isEmpty ? 0 : prevList.length / semanas;
       barras         = _calcBarras(currList, start, now);
@@ -127,7 +127,7 @@ class StatsViewModel extends ChangeNotifier {
             final d = DateTime.parse(r['created_at'] as String).toLocal();
             return d.year == day.year && d.month == day.month && d.day == day.day;
           }).toList();
-          return BarData(label, f.length, f.where((r) => r['status'] == 'submitted').length);
+          return BarData(label, f.length, f.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length);
         });
 
       case StatsPeriodo.esteMes:
@@ -138,7 +138,7 @@ class StatsViewModel extends ChangeNotifier {
             final d = DateTime.parse(r['created_at'] as String).toLocal();
             return d.isAfter(ws.subtract(const Duration(seconds: 1))) && d.isBefore(we);
           }).toList();
-          return BarData('S${i + 1}', f.length, f.where((r) => r['status'] == 'submitted').length);
+          return BarData('S${i + 1}', f.length, f.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length);
         });
 
       case StatsPeriodo.meses3:
@@ -150,7 +150,7 @@ class StatsViewModel extends ChangeNotifier {
             return d.isAfter(mes.subtract(const Duration(seconds: 1))) && d.isBefore(mesFin);
           }).toList();
           const labels = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-          return BarData(labels[mes.month - 1], f.length, f.where((r) => r['status'] == 'submitted').length);
+          return BarData(labels[mes.month - 1], f.length, f.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length);
         });
 
       case StatsPeriodo.esteAno:
@@ -162,7 +162,7 @@ class StatsViewModel extends ChangeNotifier {
             return d.isAfter(mes.subtract(const Duration(seconds: 1))) && d.isBefore(mesFin);
           }).toList();
           const labels = ['E','F','M','A','My','J','Jl','A','S','O','N','D'];
-          return BarData(labels[i], f.length, f.where((r) => r['status'] == 'submitted').length);
+          return BarData(labels[i], f.length, f.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length);
         });
     }
   }

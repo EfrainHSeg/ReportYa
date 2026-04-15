@@ -14,11 +14,12 @@ extension ReportFilterExt on ReportFilter {
         ReportFilter.rechazado  => 'Rechazado',
       };
 
-  String? get statusValue => switch (this) {
+  // null = sin filtro, lista = múltiples status posibles
+  List<String>? get statusValues => switch (this) {
         ReportFilter.todos      => null,
-        ReportFilter.pendiente  => 'draft',
-        ReportFilter.aprobado   => 'submitted',
-        ReportFilter.rechazado  => 'rejected',
+        ReportFilter.pendiente  => ['draft', 'submitted'],
+        ReportFilter.aprobado   => ['reviewed', 'closed'],
+        ReportFilter.rechazado  => ['rejected'],
       };
 }
 
@@ -208,22 +209,22 @@ class MyReportsViewModel extends ChangeNotifier {
         .eq('reported_by', uid);
     final list = List<Map<String, dynamic>>.from(data as List);
     totalCount    = list.length;
-    pendingCount  = list.where((r) => r['status'] == 'draft').length;
-    approvedCount = list.where((r) => r['status'] == 'submitted').length;
+    pendingCount  = list.where((r) => r['status'] == 'draft' || r['status'] == 'submitted').length;
+    approvedCount = list.where((r) => r['status'] == 'reviewed' || r['status'] == 'closed').length;
     rejectedCount = list.where((r) => r['status'] == 'rejected').length;
   }
 
   // ── Query con filtros ──────────────────────
   Future<List<Map<String, dynamic>>> _fetchPage(String uid, int offset) async {
-    final hasStatus = filter.statusValue != null;
-    final hasSearch = searchQuery.isNotEmpty;
+    final statusVals = filter.statusValues;
+    final hasSearch  = searchQuery.isNotEmpty;
 
     dynamic q = _supabase
         .from('reports')
         .select(_selectStr)
         .eq('reported_by', uid);
 
-    if (hasStatus) q = q.eq('status', filter.statusValue!);
+    if (statusVals != null) q = q.inFilter('status', statusVals);
     if (hasSearch) q = q.ilike('title', '%$searchQuery%');
 
     q = q
