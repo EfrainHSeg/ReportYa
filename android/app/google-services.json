@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "481348685498",
-    "project_id": "reportya-tesis",
-    "storage_bucket": "reportya-tesis.appspot.com"
+    "project_number": "725167723207",
+    "project_id": "reportya-tesis-f1425",
+    "storage_bucket": "reportya-tesis-f1425.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:481348685498:android:5b71fbafdb7862fa423c83",
+        "mobilesdk_app_id": "1:725167723207:android:f7972c919c2f6060fee4e2",
         "android_client_info": {
           "package_name": "com.codigocorrecto.reportya"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "725167723207-ngffu7q27r19lcs4djjkhptcgd0p4niv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codigocorrecto.reportya",
+            "certificate_hash": "dc9a4a2829411ab009fb49f5b12f25651f355d6d"
+          }
+        },
+        {
+          "client_id": "725167723207-1jlfub1u3gt2jcidiudgru52usl5tsof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBH8U7Qw-80t6tHY8n1xrR9ncHg0zZX4M"
+          "current_key": "AIzaSyA3vJXnGQMTXVLwpNN7X8MK0SbFC6aGqpE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725167723207-1jlfub1u3gt2jcidiudgru52usl5tsof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
